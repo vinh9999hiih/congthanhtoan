@@ -1,435 +1,747 @@
-<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                   _ooOoo_
-                  o8888888o
-                  88" . "88
-                  (| -_- |)
-                  O\  =  /O
-               ____/`---'\____
-             .'  \\|     |//  `.
-            /  \\|||  :  |||//  \
-           /  _||||| -:- |||||-  \
-           |   | \\\  -  /// |   |
-           | \_|  ''\---/''  |   |
-           \  .-\__  `-`  ___/-. /
-         ___`. .'  /--.--\  `. . __
-      ."" '<  `.___\_<|>_/___.'  >'"".
-     | | :  `- \`.;`\ _ /`;.`/ - ` : | |
-     \  \ `-.   \_ __\ /__ _/   .-` /  /
-======`-.____`-.___\_____/___.-`____.-'======
-                   `=---='
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-       PHẬT ĐỘ   KHÔNG LỖI   KHÔNG BUG
-              HOANG VINH
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
 <!DOCTYPE html>
-<html>
-<head lang="vi-VN">
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Profile Thông Tin Thanh Toán - Hoàng Vinh</title>
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="format-detection" content="address=no" />
-    <meta name="keywords" content="thanhdieu.com, blog.thanhdieu.com, api.thanhdieu.com, thanhdieu, profile thanhdieu, web thanh diệu, thông tin thanh toán website">
-    <meta name="description" content="Trang thông tin thanh toán, copy số tài khoản chỉ với 1 click">
-    <meta property="og:description" content="Trang thông tin thanh toán, copy số tài khoản chỉ với 1 click">
-    <meta property="og:type" content="acticle">
-    <meta property="og:locale" content="vi-VN" />
-    <meta property="og:title" content="Profile Thông Tin Thanh Toán - Hoàng Vinh">
-    <link rel="shortcut icon" href="https://b.top4top.io/p_3411c1b5i1.jpg" />
-    <meta property="og:image" content="https://i.imgur.com/NopdDnz.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="./assets/styles/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-    <link rel="stylesheet" href="./assets/styles/porn-hub.css">
-    <link id="dark-style" class="dark-theme" rel="stylesheet" href="./assets/styles/style-dark.css">
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cổng Thanh Toán</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --success: #00b894;
+            --danger: #ff7675;
+            --warning: #fdcb6e;
+            --purple: #a55eea;
+            --pink: #fd79a8;
+            --blue: #0984e3;
+            --cyan: #00cec9;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: var(--bg-gradient);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            margin-top: 20px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-modal {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            color: var(--dark);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(108, 92, 231, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0); }
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .verified-badge {
+            color: #1DA1F2;
+            font-size: 1rem;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #6c5ce7, #a55eea, #fd79a8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .welcome-text {
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .social-link {
+            color: var(--light);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px) scale(1.2);
+        }
+
+        .facebook { color: #1877f2; }
+        .zalo { color: #0068ff; }
+        .tiktok { color: #000000; }
+
+        .payment-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .payment-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .bank-logo {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-right: 15px;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .bank-info {
+            flex: 1;
+        }
+
+        .bank-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .account-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .account-number {
+            font-size: 0.9rem;
+            color: var(--light);
+            margin-bottom: 3px;
+        }
+
+        .account-name {
+            font-size: 0.8rem;
+            opacity: 0.9;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .copy-btn i {
+            margin-right: 5px;
+        }
+
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+        }
+
+        /* Modal thông báo */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(20px);
+            transition: transform 0.3s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        /* Form đánh giá */
+        .rating-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .rating-stars {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s;
+            margin: 0 5px;
+        }
+
+        .star.active, .star:hover {
+            color: #ffcc00;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: var(--purple);
+        }
+
+        /* Feedback button */
+        .feedback-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: var(--warning);
+            color: var(--dark);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .feedback-btn i {
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .welcome-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-triangles">
-    <div id="top-td"></div>
-    <div class="preloader">
-        <div class="preloader__wrap">
-            <div class="circle-pulse">
-                <div class="circle-pulse__1">
-                </div>
-                <div class="circle-pulse__2">
-                </div>
+<body>
+    <div class="music-control" id="musicControl">
+        <i class="fas fa-pause"></i>
+    </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="https://e.top4top.io/m_3411undw71.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="copy-notification" id="copyNotification">
+        <i class="fas fa-check-circle"></i> Đã sao chép!
+    </div>
+
+    <!-- Modal thông báo khi vào trang -->
+    <div class="modal-overlay" id="welcomeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Chào mừng đến với cổng thanh toán</h3>
+                <button class="close-modal" id="closeWelcomeModal">&times;</button>
             </div>
-            <div class="preloader__progress">
-                <span>
-                </span>
+            <div class="modal-body">
+                <p>Cảm ơn bạn đã sử dụng dịch vụ của chúng tôi. Đây là cổng thanh toán chính thức, vui lòng kiểm tra kỹ thông tin trước khi chuyển khoản.</p>
+                <p>Nhấn "Đồng ý" để tiếp tục sử dụng dịch vụ.</p>
+            </div>
+            <button class="submit-btn" id="agreeBtn">Đồng ý</button>
+        </div>
+    </div>
+
+    <!-- Modal đánh giá dịch vụ -->
+    <div class="modal-overlay" id="feedbackModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Đánh giá dịch vụ</h3>
+                <button class="close-modal" id="closeFeedbackModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm" class="rating-form">
+                    <div class="rating-stars">
+                        <i class="fas fa-star star" data-rating="1"></i>
+                        <i class="fas fa-star star" data-rating="2"></i>
+                        <i class="fas fa-star star" data-rating="3"></i>
+                        <i class="fas fa-star star" data-rating="4"></i>
+                        <i class="fas fa-star star" data-rating="5"></i>
+                    </div>
+                    <input type="hidden" id="ratingValue" name="rating" value="0">
+                    <div class="form-group">
+                        <label for="feedbackName">Tên của bạn (tùy chọn):</label>
+                        <input type="text" id="feedbackName" name="name" placeholder="Nhập tên của bạn">
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackMessage">Nhận xét của bạn:</label>
+                        <textarea id="feedbackMessage" name="message" placeholder="Hãy chia sẻ cảm nhận của bạn về dịch vụ..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Gửi đánh giá</button>
+                </form>
             </div>
         </div>
     </div>
-    <main class="main">
-        <div class="container gutter-top">
-            <div class="row sticky-parent">
-                <!-- Sidebar -->
-                <aside class="col-12 col-md-12 col-xl-3">
-                    <div class="sidebar box pb-0 sticky-column">
-                        <div class="text-center">
-                            <img class="ft-logo" src="https://b.top4top.io/p_3411c1b5i1.jpg" />
-                            <h3 class="title title--h3 sidebar__user-name td-name">
-                                <span class="weight--500 td-name">Nguyễn Hoàng Vinh <img class="td-verify"
-                                        src="https://i.imgur.com/L0GmCbu.png" /><br>
-                                    <div class="badge badge--gray td-bio">@takayuki</div>
-                            </h3>
-                            <!-- Social -->
-                        </div>
-                        <div class="sidebar__info box-inner box-inner--rounded">
-                            <!-- <ul class="contacts-block">
-                                <li class="contacts-block__item" data-toggle="tooltip" data-placement="top"
-                                    title="Website">
-                                    🔹Website:&nbsp;<a href="https://thanhdieu.com"
-                                        target="_blank">https://thanhdieu.com</a></li>
-                                </li>
-                                <li class="contacts-block__item" data-toggle="tooltip" data-placement="top"
-                                    title="Zalo Vietnam">
-                                    🔹Zalo:&nbsp;<a href="https://zalo.me/xxx" target="_blank">
-                                    https://zalo.me/xxx</a></li>
-                                </li>
-                            </ul> -->
-                            <a class="btn btn--blue-gradient navbar-brand" href="./qr-code">Quét Mã QR-Code</a>
-                        </div>
+
+    <!-- Nút mở form đánh giá -->
+    <button class="feedback-btn" id="openFeedbackBtn">
+        <i class="fas fa-comment-alt"></i> Đánh giá
+    </button>
+
+    <div class="container">
+        <div class="welcome-modal">
+            <div class="profile">
+                <img src="https://b.top4top.io/p_3411c1b5i1.jpg" alt="Avatar" class="avatar">
+                <h2 class="welcome-title">CỔNG THANH TOÁN <i class="fas fa-check-circle verified-badge"></i></h2>
+            </div>
+            <p class="welcome-text">
+                Đây là cổng thanh toán chính thức. Vui lòng sử dụng thông tin bên dưới để chuyển khoản. Mọi giao dịch đều được bảo mật và xác minh.
+            </p>
+            <div class="social-links">
+                <a href="#" class="social-link facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="social-link zalo"><i class="fab fa-weixin"></i></a>
+                <a href="#" class="social-link tiktok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        
+        <div class="payment-card">
+            <img src="https://i.imgur.com/hX9rMfj.png" alt="My Bank" class="bank-logo" onerror="this.src='https://via.placeholder.com/50'">
+            <div class="bank-info">
+                <div class="bank-name">MB BANK</div>
+                <div class="account-info">
+                    <div>
+                        <div class="account-number">090695</div>
+                        <div class="account-name">NGUYEN HOANG VINH</div>
                     </div>
-                </aside>
-                <!-- Content -->
-                <div class="col-12 col-md-12 col-xl-9">
-                    <div class="box pb-0">
-                        <!-- What -->
-                        <div class="box-inner pb-0">
-                            <h1 class="title title--h3 title__separate">Info Payments</h1>
-                            <div class="row">
-                                <!-- Case Item -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="case-item box box__second">
-                                        <img class="case-item__icon td-img-bank" src="https://i.imgur.com/hX9rMfj.png"
-                                            alt="" />
-                                        <div>
-                                            <h3 class="title title--h5">Mb Bank</h3>
-                                            <p class="case-item__caption">
-                                                STK: 090695&ensp;<i
-                                                    data-copy="090695" class="fa fa-copy td-copy"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Sao chép số tài khoản" onclick="copyToClipboard(this)"></i>
-                                                <br />CTK: NGUYEN HOANG VINH&ensp;<i
-                                                    data-copy="NGUYEN HOANG VINH" class="fa fa-copy td-copy"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Sao chép số chủ tài khoản"
-                                                    onclick="copyToClipboard(this)"></i>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Case Item -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="case-item box box__second">
-                                        <img class="case-item__icon" src="https://i.imgur.com/6AStRlN.png" alt="" />
-                                        <div>
-                                            <h3 class="title title--h5">Momo</h3>
-                                            <p class="case-item__caption">
-                                                STK:0397772987&ensp;<i
-                                                    data-copy="0397772987" class="fa fa-copy td-copy"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Sao chép số tài khoản" onclick="copyToClipboard(this)"></i>
-                                                <br />CTK: NGUYEN HOANG VU DUY&ensp;<i
-                                                    data-copy="NGUYEN HOANG VU DUY" class="fa fa-copy td-copy"
-                                                    data-toggle="tooltip" data-placement="top"
-                                                    title="Sao chép số chủ tài khoản"
-                                                    onclick="copyToClipboard(this)"></i>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Case Item -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="case-item box box__second">
-                                        <img class="case-item__icon td-img-bank" src="https://i.imgur.com/hX9rMfj.png" alt="" />
-                                        <div>
-                                            <h3 class="title title--h5">Mb Bank</h3>
-                                            <p class="case-item__caption">
-                                                STK: 596783&ensp;<i
-                                                    data-copy="596783"
-                                                    class="fa fa-copy td-copy" data-toggle="tooltip"
-                                                    data-placement="top" title="Sao chép số tài khoản"
-                                                    onclick="copyToClipboard(this)"></i>
-                                                <br />CTK: NGUYEN HOANG VINH&ensp;<i
-                                                    data-copy="NGUYEN HOANG VINH"
-                                                    class="fa fa-copy td-copy" data-toggle="tooltip"
-                                                    data-placement="top" title="Sao chép số chủ tài khoản"
-                                                    onclick="copyToClipboard(this)"></i>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Case Item -->
-                                <div class="col-12 col-lg-6">
-                                    <div class="case-item box box__second">
-                                        <img class="case-item__icon td-img-bank" src="https://i.imgur.com/hX9rMfj.png" alt="" />
-                                        <div>
-                                            <h3 class="title title--h5">Mb Bank</h3>
-                                            <p class="case-item__caption">
-                                                STK: 6666699990&ensp;<i
-                                                    data-copy="6666699990"
-                                                    class="fa fa-copy td-copy" data-toggle="tooltip"
-                                                    data-placement="top" title="Sao chép số tài khoản"
-                                                    onclick="copyToClipboard(this)"></i>
-                                                <br />CTK: NGUYEN HOANG VINH&ensp;<i
-                                                    data-copy="NGUYEN HOANG VINH"
-                                                    class="fa fa-copy td-copy" data-toggle="tooltip"
-                                                    data-placement="top" title="Sao chép số chủ tài khoản"
-                                                    onclick="copyToClipboard(this)"></i>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                        <!-- Testimonials -->
-                        <div class="box-inner box-inner--rounded">
-                            <h2 class="title title--h3 title__separate">About Me</h2>
-                            <div class="swiper-container js-carousel-review">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide review-item">
-                                        <svg class="avatar avatar--80" viewBox="0 0 84 84">
-                                            <g class="avatar__hexagon">
-                                                <image xlink:href="https://i.imgur.com/pn00UUp.gif" height="100%"
-                                                    width="100%" />
-                                            </g>
-                                        </svg>
-                                        <h4 class="title title--h5">
-                                            <a class="td-caption" href="#">Thả Thính</a>
-                                        </h4>
-                                        <p class="review-item__caption">Tuy anh không hoàn hảo, nhưng anh là duy nhất</p>
-                                    </div>
-                                    <div class="swiper-slide review-item">
-                                        <svg class="avatar avatar--80" viewBox="0 0 84 84">
-                                            <g class="avatar__hexagon">
-                                                <image xlink:href="https://i.imgur.com/Nao5Nvi.png" height="100%"
-                                                    width="100%" />
-                                            </g>
-                                        </svg>
-                                        <h4 class="title title--h5">
-                                            <a class="td-caption" href="#">Châm Ngôn</a>
-                                        </h4>
-                                        <p class="review-item__caption">Nơi đây không phải thiên đình nên quý khách đừng cho mình là thượng đế</p>
-                                    </div>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </div>
-                        <div class="swiper-pagination"></div>
-                        <div class="box-inner box-inner--rounded">
-                            <h2 class="title title--h3 title__separate">Skill Language</h2>
-                            <div class="row">
-                                <div class="col-12 col-lg-6">
-                                    <div class="box box__second">
-                                        <!-- Progress -->
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                                aria-valuemin="0" aria-valuemax="60" style="width: 60%; z-index: 2;">
-                                                <div class="progress-text">
-                                                    <span>Design Website</span>
-                                                    <span>60%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-text">
-                                            <span>Design Website</span>
-                                            </div>
-                                        </div>
-                                        <!-- Progress -->
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="80"
-                                                aria-valuemin="0" aria-valuemax="80" style="width: 80%; z-index: 2;">
-                                                <div class="progress-text">
-                                                    <span>Graphic Design</span>
-                                                    <span>80%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-text">
-                                            <span>Graphic Design</span>
-                                            </div>
-                                        </div>
-                                            <!-- Progress -->
-                                            <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="50"
-                                                aria-valuemin="0" aria-valuemax="50" style="width: 50%; z-index: 2;">
-                                                <div class="progress-text">
-                                                    <span>Freelance Developer</span>
-                                                    <span>50%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-text">
-                                            <span>Freelance Developer</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-lg-6 mt-4 mt-lg-0">
-                                    <div class="box box__second">
-                                        <!-- Progress -->
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="65"
-                                                aria-valuemin="0" aria-valuemax="65" style="width: 65%; z-index: 2;">
-                                                <div class="progress-text">
-                                                <span>Html5/Css/JavaScript</span>
-                                                    <span>65% </span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-text">
-                                                <span>HTML/Css/JavaScript</span>
-                                            </div>
-                                        </div>
-                                        <!-- Progress -->
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="40"
-                                                aria-valuemin="0" aria-valuemax="40" style="width: 40%; z-index: 2;">
-                                                <div class="progress-text">
-                                                    <span>PHP</span>
-                                                    <span>40%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-text">
-                                                <span>PHP</span>
-                                            </div>
-                                        </div>
-                                        <!-- Progress -->
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="60"
-                                                aria-valuemin="0" aria-valuemax="60" style="width: 60%; z-index: 2;">
-                                                <div class="progress-text">
-                                                    <span>ReactJS</span>
-                                                    <span>60%</span>
-                                                </div>
-                                            </div>
-                                            <div class="progress-text">
-                                                <span>ReactJS</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('090695', 'My Bank - 090695')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
                 </div>
             </div>
-            <div class="corner-icon-container">
-                <div class="corner-icon corner-icon-moon">
-                    <a class="" data-toggle="tooltip" data-placement="left" data-original-title="Toggle Display Theme">
-                        <img height="23" width="23" src="./assets/icons/moon-td.svg" alt="Dark Mode">
-                    </a>
-                </div>
-                <div class="corner-icon corner-icon-qrcode">
-                    <a class="" data-toggle="tooltip" data-placement="left" data-original-title="Mã qr của trang này">
-                        <img height="24" width="24" src="./assets/icons/qr-code-td.svg" alt="QR Code">
-                    </a>
-                </div>
-                <div class="corner-icon corner-icon-github">
-                    <a class="" data-toggle="tooltip" data-placement="left" data-original-title="Github của tôi">
-                        <img height="20" width="20" src="./assets/icons/github-color-td.svg" alt="My github">
-                    </a>
-                </div>
-                <div class="corner-icon corner-icon-scroll" id="scrollToTop">
-                    <a class="" data-toggle="tooltip" data-placement="left">
-                        <i class="fa fa-angle-up td-scroll"></i>
-                    </a>
+        </div>
+        
+        <div class="payment-card">
+            <img src="https://i.imgur.com/hX9rMfj.png" alt="MD Bank" class="bank-logo" onerror="this.src='https://via.placeholder.com/50'">
+            <div class="bank-info">
+                <div class="bank-name">MB BANK</div>
+                <div class="account-info">
+                    <div>
+                        <div class="account-number">996783</div>
+                        <div class="account-name">NGUYEN HOANG VINH</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('996783', 'MD Bank - 996783')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
                 </div>
             </div>
-            <footer style="text-transform: capitalize;" class="footer">2023 ©️ - <a id="website"
-                    href="https:/" target="_blank">From Hoang Vinh ❤️</a>
-            </footer>
         </div>
+        
+        <div class="payment-card">
+            <img src="https://i.imgur.com/hX9rMfj.png" alt="MD Bank" class="bank-logo" onerror="this.src='https://via.placeholder.com/50'">
+            <div class="bank-info">
+                <div class="bank-name">MB BANK (KHÁC)</div>
+                <div class="account-info">
+                    <div>
+                        <div class="account-number">666669990</div>
+                        <div class="account-name">NGUYEN HOANG VINH</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('666669990', 'MD Bank - 666669990')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
         </div>
+        
+        <div class="payment-card">
+            <img src="https://i.imgur.com/6AStRlN.png" alt="Momo" class="bank-logo" onerror="this.src='https://via.placeholder.com/50'">
+            <div class="bank-info">
+                <div class="bank-name">VÍ MOMO</div>
+                <div class="account-info">
+                    <div>
+                        <div class="account-number">0397772987</div>
+                        <div class="account-name">NGUYEN HOANG VU DUY</div>
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('0397772987', 'Momo - 0397772987')">
+                        <i class="fas fa-copy"></i> Copy
+                    </button>
+                </div>
+            </div>
         </div>
-    </main>
-    <script src="./assets/js/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-    <script src="./assets/js/plugins.js"></script>
-    <script src="./assets/js/common.min.js"></script>
-    <script src="./assets/js/index.js"></script>
-    <script src="./assets/js/map.init.js"></script>
-    <script src="./assets/js/js.cookie.js"></script>
-    <script src="./assets/layui/hoa-roi.js"></script>
+    </div>
+
     <script>
-    const Wussun_Music = ["https:/thanhdieu.com/files/random-music.php", ];
-    let rand = Math.floor(Math.random() * Wussun_Music.length);
-    const audio = new Audio(Wussun_Music[rand]);
-    function wussunplay() {
-        audio.play()
-    }
-    document.addEventListener("click",wussunplay()), audio.addEventListener("ended", function() {
-        rand = (rand + 1) % Wussun_Music.length, audio.src = Wussun_Music[rand], audio.play()
-    });
-    let avatar = 'https://b.top4top.io/p_3411c1b5i1.jpg';
-    let fullname = 'Nguyễn Hoàng Vinh';
-    let facebook = 'https://www.facebook.com/takayukimedia';
-    let zalo = 'https://zalo.me/03977772987';
-    window.addEventListener("DOMContentLoaded", function() {
-        window.MyNavCard = $MGC({
-            icon: `${avatar}`,
-            name: `${fullname}`,
-            info: "Chào mừng đến với profile thông tin thanh toán,tại đây bạn có thể sao chép tài khoản ngân hàng 1 cách nhanh chóng",
-            z_index: 9999,
-            blur: ".main",
-            lang: "en-US",
-            mini: false,
-            darkmode: 2,
-            /*
-            darkmode: Chế độ ban đêm
-            Giá trị mặc định: 1
-            Giá trị tùy chọn: 0、1、2、3
-            0: Tắt chế độ ban đêm
-            1: Theo dõi hệ thống (nếu hệ thống hỗ trợ chế độ ban đêm)
-            2: Bật chế độ ban đêm từ 18h đến 6h sáng tùy thời điểm
-            3: Luôn ở chế độ ban đêm
-            */
-            maxWidth: "380px",
-            /*
-            maxWidth: Chiều rộng tối đa
-            */
-            fontFamily: "",
-            /*
-            fontFamily: Phông chữ, trống hoặc không được đặt sẽ sử dụng phông chữ mặc định
-            */
-            closeDuration: 15000,
-            /*
-            closeDuration: Sau khi đóng popup, bao lâu thì nó không còn hiển thị nữa (ngay cả khi trang được làm mới thì nó không còn hiển thị nữa nhưng vẫn có thể mở thủ công thông qua nút mini)
-            Giá trị mặc định: 60000 (60 giây)
-            Lưu ý: closeDuration chỉ hoạt động khi defaultClosed được đặt thành false
-            */
-            defaultClosed: false,
-            /*
-            defaultClosed: Popup bị tắt theo mặc định
-            Giá trị mặc định: false
-            Giá trị tùy chọn: true / false
-            Lưu ý: Nếu defaultClosed là true thì closeDuration sẽ không hoạt động.
-            */
-            defaultLinkIcon: "fa-solid fa-paw",
-            fontawesome: {
-                "type": "svg",
-                "CDN": "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/js/all.min.js"
-            },
-            iconLinks: [{
-                "title": "My Github",
-                "icon": "fa-brands fa-github",
-            }, {
-                "title": "My Blog",
-                "icon": "fa-brands fa-instagram"
-            }, ],
-            links: [{
-                "title": "Contact Facebook",
-                "url": `${facebook}`,
-                "type": "primary",
-                "target": "_blank"
-            }, {
-                "title": "Contact Zalo",
-                "url": `https://zalo.me/${zalo}`,
-                "type": "primary",
-                "target": "_blank"
-            }, ],
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicControl = document.getElementById('musicControl');
+            const bgMusic = document.getElementById('bgMusic');
+            let isMusicPlaying = false;
+            
+            // Hiển thị modal chào mừng khi vào trang
+            const welcomeModal = document.getElementById('welcomeModal');
+            const closeWelcomeModal = document.getElementById('closeWelcomeModal');
+            const agreeBtn = document.getElementById('agreeBtn');
+            
+            // Kiểm tra nếu đã đồng ý trước đó
+            const hasAgreed = localStorage.getItem('hasAgreed');
+            
+            if (!hasAgreed) {
+                setTimeout(() => {
+                    welcomeModal.classList.add('active');
+                    // Tự động phát nhạc sau khi hiển thị modal
+                    playMusic();
+                }, 1000);
+            } else {
+                // Nếu đã đồng ý trước đó thì tự động phát nhạc
+                playMusic();
+            }
+            
+            closeWelcomeModal.addEventListener('click', closeModal);
+            agreeBtn.addEventListener('click', function() {
+                localStorage.setItem('hasAgreed', 'true');
+                closeModal();
+            });
+            
+            function closeModal() {
+                welcomeModal.classList.remove('active');
+            }
+            
+            function playMusic() {
+                bgMusic.volume = 0.3;
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        isMusicPlaying = true;
+                        musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                    }).catch(error => {
+                        isMusicPlaying = false;
+                        musicControl.innerHTML = '<i class="fas fa-play"></i>';
+                    });
+                }
+            }
+            
+            // Xử lý nút điều khiển nhạc
+            musicControl.addEventListener('click', function() {
+                if (isMusicPlaying) {
+                    bgMusic.pause();
+                    musicControl.innerHTML = '<i class="fas fa-play"></i>';
+                    isMusicPlaying = false;
+                } else {
+                    bgMusic.play();
+                    musicControl.innerHTML = '<i class="fas fa-pause"></i>';
+                    isMusicPlaying = true;
+                }
+            });
+            
+            // Xử lý form đánh giá
+            const feedbackModal = document.getElementById('feedbackModal');
+            const openFeedbackBtn = document.getElementById('openFeedbackBtn');
+            const closeFeedbackModal = document.getElementById('closeFeedbackModal');
+            const stars = document.querySelectorAll('.star');
+            const ratingValue = document.getElementById('ratingValue');
+            const feedbackForm = document.getElementById('feedbackForm');
+            
+            openFeedbackBtn.addEventListener('click', function() {
+                feedbackModal.classList.add('active');
+            });
+            
+            closeFeedbackModal.addEventListener('click', function() {
+                feedbackModal.classList.remove('active');
+            });
+            
+            // Xử lý đánh giá sao
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.getAttribute('data-rating');
+                    ratingValue.value = rating;
+                    
+                    stars.forEach(s => {
+                        if (s.getAttribute('data-rating') <= rating) {
+                            s.classList.add('active');
+                        } else {
+                            s.classList.remove('active');
+                        }
+                    });
+                });
+            });
+            
+            // Gửi đánh giá về Telegram bot
+            feedbackForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const rating = ratingValue.value;
+                const name = document.getElementById('feedbackName').value || 'Ẩn danh';
+                const message = document.getElementById('feedbackMessage').value;
+                
+                if (rating === '0') {
+                    alert('Vui lòng chọn số sao đánh giá!');
+                    return;
+                }
+                
+                if (!message) {
+                    alert('Vui lòng nhập nhận xét của bạn!');
+                    return;
+                }
+                
+                // Gửi dữ liệu đến Telegram bot
+                sendToTelegramBot(rating, name, message);
+                
+                // Hiển thị thông báo và đóng modal
+                showNotification('Cảm ơn bạn đã đánh giá dịch vụ!');
+                feedbackModal.classList.remove('active');
+                feedbackForm.reset();
+                stars.forEach(s => s.classList.remove('active'));
+                ratingValue.value = '0';
+            });
+            
+            function sendToTelegramBot(rating, name, message) {
+                // Thay thế bằng token bot Telegram của bạn và chat_id
+                const botToken = '7696765215:AAFpmqj1rD34uEgrho3T-97wnTeZcxJeWlo';
+                const chatId = '6369371709';
+                
+                const text = `Đánh giá mới:\n\n⭐ Đánh giá: ${rating}/5\n👤 Tên: ${name}\n📝 Nhận xét: ${message}`;
+                
+                // Gửi dữ liệu đến Telegram API
+                fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: text,
+                    }),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Đã gửi đánh giá đến Telegram:', data);
+                })
+                .catch(error => {
+                    console.error('Lỗi khi gửi đánh giá:', error);
+                });
+            }
+            
+            function showNotification(message) {
+                const notification = document.getElementById('copyNotification');
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                notification.style.opacity = '1';
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                }, 3000);
+            }
         });
-    });
+        
+        function copyToClipboard(text, displayText) {
+            const notification = document.getElementById('copyNotification');
+            
+            navigator.clipboard.writeText(text).then(() => {
+                notification.innerHTML = `<i class="fas fa-check-circle"></i> Đã sao chép: ${displayText}`;
+                notification.style.opacity = '1';
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                }, 2000);
+            }).catch(err => {
+                notification.innerHTML = `<i class="fas fa-times-circle"></i> Lỗi khi sao chép!`;
+                notification.style.background = 'var(--danger)';
+                notification.style.opacity = '1';
+                
+                setTimeout(() => {
+                    notification.style.opacity = '0';
+                    setTimeout(() => {
+                        notification.style.background = 'var(--success)';
+                    }, 300);
+                }, 2000);
+            });
+        }
     </script>
 </body>
 </html>
